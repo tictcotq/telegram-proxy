@@ -1,15 +1,11 @@
 export default async function handler(req, res) {
-  const path = req.query.path.join("/");
-  const url = new URL(`https://api.telegram.org/${path}`);
+  const url = new URL(req.url, "https://placeholder.com");
+  const path = url.pathname.replace(/^\/api\//, "");
 
-  for (const [k, v] of Object.entries(req.query)) {
-    if (k !== "path") url.searchParams.set(k, v);
-  }
-
-  const upstream = await fetch(url, {
+  const upstream = await fetch(`https://api.telegram.org/${path}${url.search}`, {
     method: req.method,
     headers: { "content-type": req.headers["content-type"] ?? "application/json" },
-    body: req.method !== "GET" ? JSON.stringify(req.body) : undefined,
+    body: req.method !== "GET" && req.method !== "HEAD" ? JSON.stringify(req.body) : undefined,
   });
 
   const data = await upstream.json();
