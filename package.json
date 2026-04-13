@@ -1,3 +1,7 @@
 {
-  "name": "telegram-proxy"
+  "name": "telegram-proxy",
+  "version": "1.0.0",
+  "description": "Minimal Vercel proxy for the Telegram Bot API",
+  "license": "MIT",
+  "private": true
 }
