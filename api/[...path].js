@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const url = new URL(req.url, "https://placeholder.com");
   const path = url.pathname.replace(/^\/api\//, "");
 
@@ -10,4 +10,4 @@ export default async function handler(req, res) {
 
   const data = await upstream.json();
   res.status(upstream.status).json(data);
-}
+};
